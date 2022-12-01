@@ -1,0 +1,43 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<MudDataGrid T="Model" Items="models" Outlined Bordered Dense Class="mt-4" ReadOnly="false" EditMode="DataGridEditMode.Form" EditTrigger="DataGridEditTrigger.Manual">
+    <Columns>
+        <Column T="Model" Field="@nameof(Model.Text1)" IsEditable="false">
+            <CellTemplate>
+                @context.Item?.Text1
+            </CellTemplate>
+            <EditTemplate>
+                <MudSelect @bind-Value="context.Item.Text1" For="(() => context.Item.Text1)" Variant="Variant.Outlined" Margin="Margin.Dense">
+                    <MudSelectItem Value="@("1")"></MudSelectItem>
+                    <MudSelectItem Value="@("3")"></MudSelectItem>
+                    <MudSelectItem Value="@("5")"></MudSelectItem>
+                    <MudSelectItem Value="@("7")"></MudSelectItem>
+                    <MudSelectItem Value="@("9")"></MudSelectItem>
+                </MudSelect>
+            </EditTemplate>
+        </Column>
+        <Column T="Model" Filterable="false" Sortable="false">
+            <CellTemplate>
+                <MudIconButton Size="Size.Small" Icon="@Icons.Outlined.Edit" OnClick="@context.Actions.StartEditingItem" />
+            </CellTemplate>
+        </Column>
+    </Columns>
+</MudDataGrid>
+
+@code{
+
+    public List<Model> models = new()
+{
+        new Model() { Text1 = "1", Text2 = "2"},
+        new Model() { Text1 = "3", Text2 = "4"},
+        new Model() { Text1 = "5", Text2 = "6"}
+    };
+
+    public class Model
+    {
+        public string? Text1 { get; set; }
+        public string? Text2 { get; set; }
+    }
+}
