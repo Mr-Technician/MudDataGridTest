@@ -9,7 +9,7 @@
                 @context.Item?.Text1
             </CellTemplate>
             <EditTemplate>
-                @if (context.Item?.Text1 != null || true) //remove this null check to see the issue. The crash occurs because the contex.Item is briefly null after tapping cancel on iOS Mobile, Blazor Server Side.
+                @if (context.Item?.Text1 != null || true) //comment out the "|| true" to see the issue. The crash occurs because the context.Item is briefly null after tapping cancel on iOS Mobile, Blazor Server Side.
                 {
                     <MudSelect @bind-Value="context.Item.Text1" For="(() => context.Item.Text1)" Variant="Variant.Outlined" Margin="Margin.Dense">
                         <MudSelectItem Value="@("1")"></MudSelectItem>
